@@ -1,0 +1,31 @@
+* What is Artie?
+
+  Artie is a diet management system written in C. The idea is simple: every week
+  I eat 28 meals: 7 *breakfasts*, 7 *lunches*, 7 *snacks* and 7 *dinners*. In order to
+  /keep track/ of what I eat and my weight, /plan/ my meals and /grocery shopping/ I
+  implemented an SQLite database following this schema:
+
+  * each *weekly plan* features a *starting/ending day*, a *starting/ending weight*
+    and seven *daily plans*,
+  * each *daily plan* features four *meals* and a *day of the week*,
+  * each *meal* features three *ingredients* and a *calory count*,
+  * each *ingredient* features a *category* (/carbohydrate, protein or fat/) and an
+    amount of *calories per 100g*.
+
+  Operating on a SQLite database via CLI on a daily basis can easily become a
+  burder, so Artie makes your life easier by abstracting such operations.
+
+* What can Artie do?
+
+  Basic use cases for Artie are:
+
+  * storing data about *staples* and *ingredients*,
+  * building *meals* by combining *ingredients*,
+  * building *daily plans* by combining *meals*,
+  * building *weekly plans* by combining *daily plans*,
+
+  but also:
+
+  * keep track of *weight* over the *weeks*,
+  * keep counts of *calories* consumed,
+  * compose a *greocery shopping list*
