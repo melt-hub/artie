@@ -28,4 +28,4 @@
 
   * keep track of *weight* over the *weeks*,
   * keep counts of *calories* consumed,
-  * compose a *greocery shopping list*
+  * compose a *grocery shopping list*
