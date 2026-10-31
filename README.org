@@ -39,20 +39,17 @@
 
   #+begin_src bash
 
-  $ ./artie staples.ing
+  $ ./artie staples.ingr
 
   #+end_src
 
-  with the file =staples.ing= looking like this:
+  with the file =staples.ingr= looking like this:
 
   #+begin_src csv
 
   pasta       | carb | 0.67
   lentils     | prot | 0.08
   olive_oil   | fat  | 0.89
-  ground_beef | prot | 0.16
-  bread       | carb | 0.36
-  butter      | fat  | 0.90
 
   #+end_src
 
@@ -82,7 +79,7 @@
 
   #+begin_src csv
 
-  pasta_e_lenticchie | pasta       | lentils | olive_oil | 100 | 250 | 5 |
+  pasta_e_lenticchie | pasta | lentils | olive_oil | 100 | 250 | 5 |
 
   #+end_src
 
@@ -107,16 +104,46 @@
   #+end_src
 
   a *daily plan* can be built out of *meals* similarly using a proper =*.plan=
-  file. Data can be updated and removed from the system in the same way, for
+  file:
+
+  #+begin_src bash
+
+  $ ./artie menu.plan
+
+  #+end_src
+
+  with the file =menu.plan= looking like this:
+
+  #+begin_src csv
+
+  "mon" | "2026-10-02" | "pasta_e_lenticchie" | "lunch" |
+
+  #+end_src
+
+  the system would then transform the CSV file into queries similar to these:
+
+  #+begin_src sql
+
+    INSERT INTO plan (day_of_week, date_calendar) VALUES
+        ('mon', '2026-10-02');
+
+    INSERT INTO slot (id_meal, id_plan, meal_type) VALUES
+        ((SELECT id FROM meal WHERE name = 'pasta_e_lenticchie'),
+         (SELECT id FROM ingredient WHERE date_calendar = '2026-10-02'),
+         'lunch');
+
+  #+end_src
+
+  Data can be updated and removed from the system in the same way, for
   example:
 
   #+begin_src bash
 
-  $ ./artie staples.ing
+  $ ./artie staples.ingr
 
   #+end_src
 
-  with the file =staples.ing= looking like this:
+  with the file =staples.ingr= looking like this:
 
   #+begin_src csv
 
@@ -134,7 +161,7 @@
 
   #+end_src
 
-  , if the file =staples.ing= looked like this instead:
+  , if the file =staples.ingr= looked like this instead:
 
   #+begin_src csv
 

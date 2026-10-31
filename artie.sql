@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS meal (
 CREATE TABLE plan (
     id INTEGER PRIMARY KEY,
     day_of_week TEXT CHECK(day_of_week IN ('mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun')) NOT NULL,
-    date_cal TEXT
+    date_calendar TEXT
 );
 
 -- r[ingredient<->meal]: composition
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS composition (
 CREATE TABLE IF NOT EXISTS slot (
     id_meal INTEGER,
     id_plan INTEGER,
-    meal_name TEXT CHECK (meal_name IN ('breakfast', 'lunch', 'dinner')),
+    meal_type TEXT CHECK (meal_name IN ('breakfast', 'lunch', 'dinner')),
     PRIMARY KEY (id_meal, meal_name),
     CONSTRAINT fk_meal_slot
        FOREIGN KEY (id_meal) REFERENCES meal(id)

@@ -1,5 +1,8 @@
-artie
 *.o
 *.out
+*.ingr
+*.meal
+*.plan
+artie
 IDEAS.org
 artie.db
