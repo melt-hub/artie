@@ -32,8 +32,18 @@
 
 * How to use:
 
-  Examples of how the user can store ingredients data and build meals
-  with Artie. A custom version of CSV format is used, a file like this:
+** Adding/removing ingredients, building meals and daily plans
+
+  Artie parses CSV files as input. To insert ingredients into the system, for
+  example, the user would run Artie as follows:
+
+  #+begin_src bash
+
+  $ ./artie staples.ing
+
+  #+end_src
+
+  with the file =staples.ing= looking like this:
 
   #+begin_src csv
 
@@ -46,7 +56,7 @@
 
   #+end_src
 
-  is transformed into:
+  the system would then transform the CSV file into queries similar to these:
 
   #+begin_src sql
 
@@ -70,7 +80,16 @@
 
   #+end_src
 
-  then, a file like this:
+  then, in order to build meals with said ingredients, the user would run Artie
+  as follows:
+
+  #+begin_src bash
+
+  $ ./artie meals.meal
+
+  #+end_src
+
+  with the file =meals.meal= looking like this:
 
   #+begin_src csv
 
@@ -79,7 +98,7 @@
 
   #+end_src
 
-  is transformed into:
+  the system would then transform the CSV file into queries similar to these:
 
   #+begin_src sql
     INSERT INTO meal (name, category) VALUES
@@ -108,5 +127,49 @@
         ((SELECT id FROM meal WHERE name = 'simple_chili'),
          (SELECT id FROM ingredient WHERE name = 'butter'),
          3);
+
+  #+end_src
+
+  a *daily plan* can be built out of *meals* similarly using a proper =*.plan=
+  file. Data can be updated and removed from the system in the same way, for
+  example:
+
+  #+begin_src bash
+
+  $ ./artie staples.ing
+
+  #+end_src
+
+  with the file =staples.ing= looking like this:
+
+  #+begin_src csv
+
+  pasta   |
+  lentils |
+
+  #+end_src
+
+  the system would generate queries similar to these:
+
+  #+begin_src sql
+
+    DELETE FROM ingredient WHERE name = 'pasta';
+    DELETE FROM ingredient WHERE name = 'lentils';
+
+  #+end_src
+
+  , if the file =staples.ing= looked like this instead:
+
+  #+begin_src csv
+
+  pasta | carb | 0.55
+
+  #+end_src
+
+  Artie would generate a query similar to this:
+
+  #+begin_src sql
+
+    UPDATE ingredient SET prop = 0.55 WHERE name = 'pasta';
 
   #+end_src
