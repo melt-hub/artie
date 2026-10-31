@@ -62,21 +62,10 @@
 
     INSERT INTO ingredient (name, category, prop) VALUES
         ('pasta', 'carb', 0.67);
-
     INSERT INTO ingredient (name, category, prop) VALUES
         ('lentils', 'prot', 0.08);
-
     INSERT INTO ingredient (name, category, prop) VALUES
         ('olive_oil', 'fat', 0.89);
-
-    INSERT INTO ingredient (name, category, prop) VALUES
-        ('ground_beed', 'prot', 0.16);
-
-    INSERT INTO ingredient (name, category, prop) VALUES
-        ('bread', 'carb', 0.36);
-
-    INSERT INTO ingredient (name, category, prop) VALUES
-        ('butter', 'fat', 0.90);
 
   #+end_src
 
@@ -94,18 +83,15 @@
   #+begin_src csv
 
   pasta_e_lenticchie | pasta       | lentils | olive_oil | 100 | 250 | 5 |
-  simple_chili       | ground_beef | bread   | butter    | 220 | 100 | 3 |
 
   #+end_src
 
   the system would then transform the CSV file into queries similar to these:
 
   #+begin_src sql
-    INSERT INTO meal (name, category) VALUES
-        ('pasta_e_lenticchie', 'full');
 
     INSERT INTO meal (name, category) VALUES
-        ('simple_chili', 'full');
+        ('pasta_e_lenticchie', 'full');
 
     INSERT INTO composition (id_meal, id_ingredient, portion) VALUES
         ((SELECT id FROM meal WHERE name = 'pasta_e_lenticchie'),
@@ -117,16 +103,6 @@
         ((SELECT id FROM meal WHERE name = 'pasta_e_lenticchie'),
          (SELECT id FROM ingredient WHERE name = 'olive_oil'),
          5),
-
-        ((SELECT id FROM meal WHERE name = 'simple_chili'),
-         (SELECT id FROM ingredient WHERE name = 'ground_beef'),
-         220),
-        ((SELECT id FROM meal WHERE name = 'simple_chili'),
-         (SELECT id FROM ingredient WHERE name = 'bread'),
-         100),
-        ((SELECT id FROM meal WHERE name = 'simple_chili'),
-         (SELECT id FROM ingredient WHERE name = 'butter'),
-         3);
 
   #+end_src
 
@@ -173,3 +149,9 @@
     UPDATE ingredient SET prop = 0.55 WHERE name = 'pasta';
 
   #+end_src
+
+** TODO Visualizing plans
+
+** TODO Generating statistics
+
+** TODO Generating shopping list
