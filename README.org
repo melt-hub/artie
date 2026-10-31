@@ -47,9 +47,9 @@
 
   #+begin_src csv
 
-  pasta       | carb | 0.67
-  lentils     | prot | 0.08
-  olive_oil   | fat  | 0.89
+  "pasta"     | "carb" | 0.67 | 150 |
+  "lentils"   | "prot" | 0.08 | 150 |
+  "olive_oil" | "fat"  | 0.89 | 150 |
 
   #+end_src
 
@@ -58,11 +58,11 @@
   #+begin_src sql
 
     INSERT INTO ingredient (name, category, prop) VALUES
-        ('pasta', 'carb', 0.67);
+        ('pasta', 'carb', 0.67, 150);
     INSERT INTO ingredient (name, category, prop) VALUES
-        ('lentils', 'prot', 0.08);
+        ('lentils', 'prot', 0.08, 150);
     INSERT INTO ingredient (name, category, prop) VALUES
-        ('olive_oil', 'fat', 0.89);
+        ('olive_oil', 'fat', 0.89, 150);
 
   #+end_src
 
@@ -71,7 +71,7 @@
 
   #+begin_src bash
 
-  $ ./artie meals.meal
+  $ ./artie pasta_e_lenticchie.meal
 
   #+end_src
 
@@ -79,7 +79,7 @@
 
   #+begin_src csv
 
-  pasta_e_lenticchie | pasta | lentils | olive_oil | 100 | 250 | 5 |
+  "pasta_e_lenticchie" | "pasta" | "lentils" | "olive_oil" | 100 | 250 | 5 |
 
   #+end_src
 
@@ -108,7 +108,7 @@
 
   #+begin_src bash
 
-  $ ./artie menu.plan
+  $ ./artie monday.plan
 
   #+end_src
 

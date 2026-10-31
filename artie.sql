@@ -15,7 +15,8 @@ CREATE TABLE IF NOT EXISTS ingredient (
     id INTEGER PRIMARY KEY,
     name TEXT NOT NULL,
     category TEXT CHECK(category IN ('carb','prot','fat')),
-    prop REAL NOT NULL
+    macro_prop REAL NOT NULL,
+    cal REAL NOT NULL
 );
 
 -- e: meal
@@ -50,8 +51,8 @@ CREATE TABLE IF NOT EXISTS composition (
 CREATE TABLE IF NOT EXISTS slot (
     id_meal INTEGER,
     id_plan INTEGER,
-    meal_type TEXT CHECK (meal_name IN ('breakfast', 'lunch', 'dinner')),
-    PRIMARY KEY (id_meal, meal_name),
+    meal_type TEXT CHECK (meal_type IN ('breakfast', 'lunch', 'dinner')),
+    PRIMARY KEY (id_meal, meal_type),
     CONSTRAINT fk_meal_slot
        FOREIGN KEY (id_meal) REFERENCES meal(id)
        ON DELETE CASCADE ON UPDATE CASCADE,

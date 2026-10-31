@@ -32,8 +32,8 @@ int main(int argc, char **argv)
     }
 
     /* inserting an ingredient */
-    const char *q1 = "INSERT INTO ingredient (name, category, prop) \
-                      VALUES ('pasta', 'carb', 0.55)";
+    const char *q1 = "INSERT INTO ingredient (name, category, macro_prop, cal) \
+                      VALUES ('pasta', 'carb', 0.55, 150)";
     sqlite3_stmt *s;
 
     if (sqlite3_prepare_v2(db, q1, -1, &s, 0) != SQLITE_OK) {
@@ -60,10 +60,11 @@ int main(int argc, char **argv)
     }
 
     if (sqlite3_step(t) == SQLITE_ROW) {
-        printf("query returned: (%s, %s, %f)\n",
+        printf("query returned: (%s, %s, %f, %f)\n",
                sqlite3_column_text(t, 1),
                sqlite3_column_text(t, 2),
-               sqlite3_column_double(t, 3));
+               sqlite3_column_double(t, 3),
+               sqlite3_column_double(t, 4));
     }
 
     if (sqlite3_finalize(t) != SQLITE_OK) {
