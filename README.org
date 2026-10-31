@@ -29,3 +29,84 @@
   * keep track of *weight* over the *weeks*,
   * keep counts of *calories* consumed,
   * compose a *grocery shopping list*
+
+* How to use:
+
+  Examples of how the user can store ingredients data and build meals
+  with Artie. A custom version of CSV format is used, a file like this:
+
+  #+begin_src csv
+
+  pasta       | carb | 0.67
+  lentils     | prot | 0.08
+  olive_oil   | fat  | 0.89
+  ground_beef | prot | 0.16
+  bread       | carb | 0.36
+  butter      | fat  | 0.90
+
+  #+end_src
+
+  is transformed into:
+
+  #+begin_src sql
+
+    INSERT INTO ingredient (name, category, prop) VALUES
+        ('pasta', 'carb', 0.67);
+
+    INSERT INTO ingredient (name, category, prop) VALUES
+        ('lentils', 'prot', 0.08);
+
+    INSERT INTO ingredient (name, category, prop) VALUES
+        ('olive_oil', 'fat', 0.89);
+
+    INSERT INTO ingredient (name, category, prop) VALUES
+        ('ground_beed', 'prot', 0.16);
+
+    INSERT INTO ingredient (name, category, prop) VALUES
+        ('bread', 'carb', 0.36);
+
+    INSERT INTO ingredient (name, category, prop) VALUES
+        ('butter', 'fat', 0.90);
+
+  #+end_src
+
+  then, a file like this:
+
+  #+begin_src csv
+
+  pasta_e_lenticchie | pasta       | lentils | olive_oil | 100 | 250 | 5 |
+  simple_chili       | ground_beef | bread   | butter    | 220 | 100 | 3 |
+
+  #+end_src
+
+  is transformed into:
+
+  #+begin_src sql
+    INSERT INTO meal (name, category) VALUES
+        ('pasta_e_lenticchie', 'full');
+
+    INSERT INTO meal (name, category) VALUES
+        ('simple_chili', 'full');
+
+    INSERT INTO composition (id_meal, id_ingredient, portion) VALUES
+        ((SELECT id FROM meal WHERE name = 'pasta_e_lenticchie'),
+         (SELECT id FROM ingredient WHERE name = 'pasta'),
+         100),
+        ((SELECT id FROM meal WHERE name = 'pasta_e_lenticchie'),
+         (SELECT id FROM ingredient WHERE name = 'lentils'),
+         250),
+        ((SELECT id FROM meal WHERE name = 'pasta_e_lenticchie'),
+         (SELECT id FROM ingredient WHERE name = 'olive_oil'),
+         5),
+
+        ((SELECT id FROM meal WHERE name = 'simple_chili'),
+         (SELECT id FROM ingredient WHERE name = 'ground_beef'),
+         220),
+        ((SELECT id FROM meal WHERE name = 'simple_chili'),
+         (SELECT id FROM ingredient WHERE name = 'bread'),
+         100),
+        ((SELECT id FROM meal WHERE name = 'simple_chili'),
+         (SELECT id FROM ingredient WHERE name = 'butter'),
+         3);
+
+  #+end_src

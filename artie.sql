@@ -14,7 +14,8 @@ PRAGMA foreign_keys = ON;
 CREATE TABLE IF NOT EXISTS ingredient (
     id INTEGER PRIMARY KEY,
     name TEXT NOT NULL,
-    category TEXT CHECK(category IN ('carbohydrate','protein','fat'))
+    category TEXT CHECK(category IN ('carb','prot','fat')),
+    prop REAL NOT NULL
 );
 
 -- e: meal
