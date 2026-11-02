@@ -46,8 +46,8 @@ int main(int argc, char **argv)
     int ecode = get_file_ext_code(farg);
 
     if (ecode > 0) {
-        /* csv_table *data = chop_it_csv_parse(farg);
-        artie_update_db(data); */
+        /* csv_table *data = chopdat_csv(farg);
+        artie_update_db(data, ecode); */
         printf("got here");
     } else {
         assert(0 && "not implemented");
