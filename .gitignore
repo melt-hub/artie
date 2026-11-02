@@ -3,6 +3,7 @@
 *.ingr
 *.meal
 *.plan
+test*
 artie
 IDEAS.org
 artie.db

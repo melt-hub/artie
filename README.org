@@ -39,17 +39,17 @@
 
   #+begin_src bash
 
-  $ ./artie staples.ingr
+  $ ./artie input.ingr
 
   #+end_src
 
-  with the file =staples.ingr= looking like this:
+  with the file =input.ingr= looking like this:
 
   #+begin_src csv
 
-  "pasta"     | "carb" | 0.67 | 150 |
-  "lentils"   | "prot" | 0.08 | 150 |
-  "olive_oil" | "fat"  | 0.89 | 150 |
+  "pasta"     | "carb" | 0.67 | 150
+  "lentils"   | "prot" | 0.08 | 150
+  "olive_oil" | "fat"  | 0.89 | 150
 
   #+end_src
 
@@ -71,15 +71,15 @@
 
   #+begin_src bash
 
-  $ ./artie pasta_e_lenticchie.meal
+  $ ./artie input.meal
 
   #+end_src
 
-  with the file =meals.meal= looking like this:
+  with the file =input.meal= looking like this:
 
   #+begin_src csv
 
-  "pasta_e_lenticchie" | "pasta" | "lentils" | "olive_oil" | 100 | 250 | 5 |
+  "pasta_e_lenticchie" | "pasta" | "lentils" | "olive_oil" | 100 | 250 | 5
 
   #+end_src
 
@@ -108,15 +108,15 @@
 
   #+begin_src bash
 
-  $ ./artie monday.plan
+  $ ./artie input.plan
 
   #+end_src
 
-  with the file =menu.plan= looking like this:
+  with the file =input.plan= looking like this:
 
   #+begin_src csv
 
-  "mon" | "2026-10-02" | "pasta_e_lenticchie" | "lunch" |
+  "mon" | "2026-10-02" | "pasta_e_lenticchie" | "lunch"
 
   #+end_src
 
@@ -139,16 +139,16 @@
 
   #+begin_src bash
 
-  $ ./artie staples.ingr
+  $ ./artie input.ingr
 
   #+end_src
 
-  with the file =staples.ingr= looking like this:
+  with the file =input.ingr= looking like this:
 
   #+begin_src csv
 
-  pasta   |
-  lentils |
+  pasta
+  lentils
 
   #+end_src
 
@@ -161,11 +161,11 @@
 
   #+end_src
 
-  , if the file =staples.ingr= looked like this instead:
+  , if the file =input.ingr= looked like this instead:
 
   #+begin_src csv
 
-  pasta | carb | 0.55
+  "pasta" | "carb" | 0.55
 
   #+end_src
 
